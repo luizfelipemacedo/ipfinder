@@ -22,7 +22,7 @@ export default function Home() {
   //requisição para a api
   async function getIp() {
     try {
-      const res = await fetch('http://ip-api.com/json/')
+      const res = await fetch('https://ipapi.co/json/')
       const data = await res.json()
 
       console.log(data)
@@ -74,17 +74,17 @@ export default function Home() {
           >
         <Heading color='black' paddingBottom='5'>Ip Finder</Heading>
         
-        <Flex direction='row' gap='5' mb={2} justifyContent='center'>
-          <Text>Ip: {location.query}</Text>
+        <Flex direction='row' gap='5' mb={2} justifyContent='center' textAlign='center'>
+          <Text>Ipv6: {location.ip}</Text>
           <Tooltip label='Copiar'>
           <Button onClick={handleClick} colorScheme='facebook'><CopyIcon/></Button>
           </Tooltip>
         </Flex>
 
-        <Text>Latitude: {location.lat}</Text>
-        <Text>Latitude: {location.lon}</Text>
+        <Text>Latitude: {location.latitude}</Text>
+        <Text>Latitude: {location.longitude}</Text>
         <Text>Endereço: {location.city} - {location.region} ({location.country})</Text>
-        <Text>Provedor: {location.isp}</Text>
+        <Text>Provedor: {location.org}</Text>
 
         </Flex>
     </Flex>
