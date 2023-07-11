@@ -12,14 +12,10 @@ import { useEffect, useState } from 'react'
 import { CopyIcon } from '@chakra-ui/icons'
 
 export default function Home() {
-  useEffect(() => { 
-    document.body.style.backgroundColor = '#483C67' 
-  }, [])
-
   const toast = useToast()
-  //setar localização
-  const [location, setLocation] = useState([])
-  //requisição para a api
+  const [location, setLocation] = useState([]);
+  console.log(location);
+
   async function getIp() {
     try {
       const res = await fetch('https://ipapi.co/json/')
@@ -32,28 +28,21 @@ export default function Home() {
       console.error(error)
     }
   }
-  //rodar função
+
   useEffect(() => {
+    document.body.style.backgroundColor = '#483C67';
     getIp();
   }, [])
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(location.query);
-      setCopied(true);
-    } catch (err) {
-      console.error("Erro ao copiar texto para a área de transferência", err);
-    }
-  };
-
   const handleClick = () => {
-    handleCopy();
+    navigator.clipboard.writeText(location.ip);
+
     toast({
         title: 'Copiado para a área de transferência',
         status: 'success',
         duration: 3000,
         isClosable: true,
-      })
+      });
   }
   
   return (
